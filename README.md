@@ -1,6 +1,6 @@
 # Get versionName and versionCode on Android
 
-Extracts the Name version and the Code version from the Android project. It is useful if the versionName and versionCode in `build.gradle` or `build.gradle.kts` are defined somewhere else. Therefore, this step uses a Gradle task to print these two values.
+Extracts the version name and the version code from the Android project. It is useful if the versionName and versionCode values are defined somewhere else. Therefore, this step uses a Gradle task to print these two values.
 
 
 ## How to use this Step
