@@ -12,7 +12,7 @@ title: |-
 summary: |
   Extract the versionName and the versionCode on an Android project using a Gradle task
 description: |
-  Extracts the version name and the version code from the Android project. It is useful if the versionName and versionCode values are defined somewhere else. Therefore, this step uses a Gradle task to print these two values. It supports Groovy and Kotlin DSL files.
+  Extracts the version name and the version code from the Android project. It is useful if the versionName and versionCode values are defined somewhere else. Therefore, this step uses a Gradle task to print these two values. It supports only Groovy files for now.
 website: https://github.com/vladimirpetrovski/bitrise-step-version-extractor-android
 source_code_url: https://github.com/vladimirpetrovski/bitrise-step-version-extractor-android
 support_url: https://github.com/vladimirpetrovski/bitrise-step-version-extractor-android/issues
@@ -58,6 +58,13 @@ inputs:
         or if it is in a sub directory, `./sub/dir/gradlew`.
       is_required: true
       title: gradlew file path
+  - variant: ""
+    opts:
+      is_required: false
+      title: Build variant
+      summary: Set a custom variant, in case you need to print the version name and version code for a specific build.
+      description: |
+        Define a build variant if you need get a specific version defined in a flavor, for example: `Flavor1Debug`. If it is not defined, by default extracts the version from the `defaultConfig` section in the `build.gradle` file.
 
 outputs:
   - EXTRACTED_ANDROID_VERSION_NAME: null

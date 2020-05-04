@@ -1,6 +1,4 @@
 #!/bin/bash
-if [ ${build_gradle_path: -4} == ".kts" ] # Kotlin DSL
-then
 echo "
 task(\"printVersion\") {
   doLast {
@@ -8,19 +6,18 @@ task(\"printVersion\") {
       println android.defaultConfig.versionCode
   }
 }
-" >> ${build_gradle_path}
-else # Groovy
-echo "
-task printVersion {
-  doLast {
-      println android.defaultConfig.versionName
-      println android.defaultConfig.versionCode
-  }
+
+android.applicationVariants.all { variant ->
+    task(\"printVersion\${variant.name.capitalize()}\") {
+        doLast {
+            println variant.versionName
+            println variant.versionCode
+        }
+    }
 }
 " >> ${build_gradle_path}
-fi
 
-VERSION=$(${gradlew_path} -q printVersion)
+VERSION=$(${gradlew_path} -q printVersion${variant})
 VERSION_NAME=$(printf "%s\n" $VERSION | sed -n 1p)
 VERSION_CODE=$(printf "%s\n" $VERSION | sed -n 2p)
 envman add --key EXTRACTED_ANDROID_VERSION_NAME --value $VERSION_NAME
