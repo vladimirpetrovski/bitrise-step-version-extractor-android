@@ -1,4 +1,15 @@
 #!/bin/bash
+if [ ${build_gradle_path: -4} == ".kts" ] # Kotlin DSL
+then
+echo "
+task(\"printVersion\") {
+  doLast {
+      println android.defaultConfig.versionName
+      println android.defaultConfig.versionCode
+  }
+}
+" >> ${build_gradle_path}
+else # Groovy
 echo "
 task printVersion {
   doLast {
@@ -7,6 +18,7 @@ task printVersion {
   }
 }
 " >> ${build_gradle_path}
+fi
 
 VERSION=$(${gradlew_path} -q printVersion)
 VERSION_NAME=$(printf "%s\n" $VERSION | sed -n 1p)
