@@ -45,7 +45,7 @@ inputs:
       is_required: true
       title: Path to the build.gradle file
       summary: Path to the app's build.gradle file where the versionCode and versionName are defined.
-  - gradlew_path: $GRADLEW_PATH
+  - gradlew_path: "./gradlew"
     opts:
       category: Config
       description: |
