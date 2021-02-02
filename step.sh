@@ -17,7 +17,7 @@ android.applicationVariants.all { variant ->
 }
 " >> ${build_gradle_path}
 
-VERSION=$(${gradlew_path} -q printVersion${variant})
+VERSION=$(${gradlew_path} -q printVersion${variant} | tail -n 2)
 VERSION_NAME=$(printf "%s\n" $VERSION | sed -n 1p)
 VERSION_CODE=$(printf "%s\n" $VERSION | sed -n 2p)
 envman add --key EXTRACTED_ANDROID_VERSION_NAME --value $VERSION_NAME
